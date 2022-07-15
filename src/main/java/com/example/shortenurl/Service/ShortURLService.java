@@ -1,9 +1,10 @@
 package com.example.shortenurl.Service;
 
+import com.example.shortenurl.Model.ShortURL;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface ShortURLService {
-    public String convertToShortURL(String longURL);
-    public String convertToLongURL(String shortURL);
+    public ShortURL convertToShortURL(String longURL);
+    public ShortURL convertToLongURL(String shortURL);
 }

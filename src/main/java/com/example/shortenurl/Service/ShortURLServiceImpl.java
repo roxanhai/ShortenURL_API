@@ -8,8 +8,6 @@ import com.example.shortenurl.Repository.ShortURLRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.transform.Result;
-
 @Service
 public class ShortURLServiceImpl implements ShortURLService{
     @Autowired
@@ -17,20 +15,18 @@ public class ShortURLServiceImpl implements ShortURLService{
 
     private SnowFlakeID sfService = new SnowFlakeID();
     @Override
-    public String convertToShortURL(String longURL) {
+    public ShortURL convertToShortURL(String longURL) {
         long sfID = this.sfService.newIdSequence();
-        System.out.println(sfID);
-        String sURL = Base62.to_Base62(sfID);
+        String sURL = "http://localhost:8080/"+ Base62.to_Base62(sfID);
         ShortURL shortURLData = new ShortURL(sfID,sURL,longURL);
         shortURLRepository.save(shortURLData);
-        return shortURLData.getShort62();
+        return shortURLData;
     }
 
     @Override
-    public String convertToLongURL(String shortURL) {
+    public ShortURL convertToLongURL(String shortURL) {
         Long ID = Base62.to_Base10(shortURL);
-        System.out.println(ID);
-        String result = shortURLRepository.findById(ID).get().getLongURL();
-        return result;
+        ShortURL shortURLData = shortURLRepository.findById(ID).get();
+        return shortURLData;
     }
 }
