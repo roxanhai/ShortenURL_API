@@ -5,6 +5,7 @@ import com.example.shortenurl.Model.Base62;
 import com.example.shortenurl.Model.ShortURL;
 import com.example.shortenurl.Model.SnowFlakeID;
 import com.example.shortenurl.Repository.ShortURLRepository;
+import com.example.shortenurl.dto.LongUrlRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,11 @@ public class ShortURLServiceImpl implements ShortURLService{
 
     private SnowFlakeID sfService = new SnowFlakeID();
     @Override
-    public ShortURL convertToShortURL(String longURL) {
+    public ShortURL convertToShortURL(LongUrlRequest longURL) {
         long sfID = this.sfService.newIdSequence();
         String sURL = "http://localhost:8080/"+ Base62.to_Base62(sfID);
-        ShortURL shortURLData = new ShortURL(sfID,sURL,longURL);
+        System.out.print(longURL.getLongUrl());
+        ShortURL shortURLData = new ShortURL(sfID,sURL,longURL.getLongUrl());
         shortURLRepository.save(shortURLData);
         return shortURLData;
     }

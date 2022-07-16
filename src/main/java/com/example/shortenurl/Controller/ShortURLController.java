@@ -2,6 +2,7 @@ package com.example.shortenurl.Controller;
 
 import com.example.shortenurl.Model.ShortURL;
 import com.example.shortenurl.Service.ShortURLService;
+import com.example.shortenurl.dto.LongUrlRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class ShortURLController {
     private ShortURLService shortURLService;
 
     @PostMapping("/shortURL")
-    public ResponseEntity<?> toShortURL(@RequestParam String longURL){
+    public ResponseEntity<?> toShortURL(@RequestBody LongUrlRequest longURL){
         return ResponseEntity.ok(shortURLService.convertToShortURL(longURL));
     }
 
