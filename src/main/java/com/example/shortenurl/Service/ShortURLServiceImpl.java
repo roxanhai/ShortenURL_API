@@ -19,11 +19,11 @@ public class ShortURLServiceImpl implements ShortURLService{
     public ShortURL convertToShortURL(LongUrlRequest longURL) {
         long sfID = this.sfService.newIdSequence();
         String sURL = "http://localhost:8080/"+ Base62.to_Base62(sfID);
-        System.out.print(longURL.getLongUrl());
         ShortURL shortURLData = new ShortURL(sfID,sURL,longURL.getLongUrl());
         shortURLRepository.save(shortURLData);
         return shortURLData;
     }
+
 
     @Override
     public ShortURL convertToLongURL(String shortURL) {

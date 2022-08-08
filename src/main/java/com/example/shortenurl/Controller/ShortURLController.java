@@ -10,6 +10,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("")
+@CrossOrigin(origins = "http://127.0.0.1:5500/")
 public class ShortURLController {
     @Autowired
     private ShortURLService shortURLService;
@@ -26,7 +27,4 @@ public class ShortURLController {
         redirectView.setUrl(shortURLData.getLongURL());
         return redirectView;
     }
-
-
-
 }

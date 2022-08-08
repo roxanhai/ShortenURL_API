@@ -7,5 +7,4 @@ import lombok.Setter;
 
 public class LongUrlRequest {
     private String longUrl;
-
 }
